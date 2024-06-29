@@ -1,0 +1,4 @@
+/sentiment
+/nlp
+notebooks/*.bin
+notebooks/*.bin.gz
