@@ -6,6 +6,7 @@ This repository contains a Python-based tool for performing sentiment analysis o
 - Sentiment classification: Classify Amharic text as either positive, negative, or neutral sentiment.
 - Polarity scoring: Assign a numerical sentiment score ranging from -1 (negative) to +1 (positive) for Amharic text.
 - fine-tuned model: The tool uses a pre-trained model and fine tunes it on specifically trained on Amharic data. which can be found in the data folder
+- for the word vector I used fasttext because it showed better results for the amharic langugage. I haven't uploaded it because it was large but can be found on the [fasttext website](https://fasttext.cc/docs/en/crawl-vectors.html)
 
 #### Short cuts
 If someone doesn't want the witty griddy details on how to fine tune a model and just wants a short implementation, the hugging_face folder conssists of a translation model and zero shot classification model which uses the NLLB (No langugage left Behind) model by facebook and DeBERTa-v3-base-mnli-fever-anli from MoritzLaurer respectively.
