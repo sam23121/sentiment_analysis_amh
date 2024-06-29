@@ -32,7 +32,7 @@ def create_tensor(train_x, train_y, valid_x, valid_y, test_x, test_y, batch_size
 
     return train_loader, valid_loader, test_loader, batch_size
 
-def train(net, batch_size, lr=0.01, epochs = 6, clip=5):
+def train(net, batch_size, train_loader, valid_loader, lr=0.01, epochs = 6, clip=5):
 
 # loss and optimization functions
     # lr=0.001
@@ -112,7 +112,7 @@ def train(net, batch_size, lr=0.01, epochs = 6, clip=5):
                     "Loss: {:.6f}...".format(loss.item()),
                     "Val Loss: {:.6f}".format(np.mean(val_losses)))
 
-train_on_gpu = False
+
 class SentimentLSTM(nn.Module):
     """
     The RNN model that will be used to perform Sentiment analysis.
@@ -127,6 +127,7 @@ class SentimentLSTM(nn.Module):
         self.output_size = output_size
         self.n_layers = n_layers
         self.hidden_dim = hidden_dim
+        self.train_on_gpu = False
         
         # embedding and LSTM layers
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
@@ -174,7 +175,7 @@ class SentimentLSTM(nn.Module):
         # initialized to zero, for hidden state and cell state of LSTM
         weight = next(self.parameters()).data
         
-        if (train_on_gpu):
+        if (self.train_on_gpu):
             hidden = (weight.new(self.n_layers, batch_size, self.hidden_dim).zero_().cuda(),
                   weight.new(self.n_layers, batch_size, self.hidden_dim).zero_().cuda())
         else:
